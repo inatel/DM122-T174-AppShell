@@ -1,2 +1,3 @@
-# DM122-T174-AppShell
-PWA AppShell with Vanilla JS
+# PWA App Shell
+
+A PWA App Shell with vanilla JavaScript
