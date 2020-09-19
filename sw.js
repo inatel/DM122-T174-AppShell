@@ -1,4 +1,4 @@
-const cacheName = 'app-shell-v1';
+const cacheName = 'app-shell-v2';
 const assetsToCache = [
   'https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.3.0/material.indigo-pink.min.css',
   'https://fonts.gstatic.com/s/materialicons/v55/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2',
@@ -55,9 +55,10 @@ async function networkFirst(request) {
 async function cacheFirst(request) {
   try {
     const cache = await caches.open(cacheName);
-    return cache.match(request);
+    const response = await cache.match(request);
+    return response || fetch(request);
   } catch (error) {
-    return await fetch(request);
+    console.log(error);
   }
 }
 
