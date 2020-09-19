@@ -1,7 +1,19 @@
 const cacheName = 'app-shell-v1';
 const assetsToCache = [
-  'offline.html'
+  'assets/images/pwa-logo.png'
 ];
+
+function removeOldCache(key) {
+  if (key !== cacheName) {
+    console.log(`[Service Worker] Removing old cache: ${key}`);
+    return caches.delete(key);
+  }
+}
+
+async function cacheCleanup() {
+  const keyList = await caches.keys();
+  return Promise.all(keyList.map(removeOldCache));
+}
 
 async function cacheStaticAssets() {
   const cache = await caches.open(cacheName);
@@ -16,6 +28,7 @@ self.addEventListener('install', event => {
 
 self.addEventListener('activate', event => {
   console.log('[Service Worker] Activating Service Worker...', event);
+  event.waitUntil(cacheCleanup());
   return self.clients.claim();
 });
 
