@@ -1,3 +1,3 @@
-# PWA App Shell
+# PWA - Vanilla JS
 
-A PWA App Shell with vanilla JavaScript
+An example of PWA with Vanilla JS
